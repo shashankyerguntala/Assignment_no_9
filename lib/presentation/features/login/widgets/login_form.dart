@@ -98,9 +98,12 @@ class _LoginFormState extends State<LoginForm> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     CircleAvatar(
+                      radius: 10,
                       backgroundColor: Colors.white,
                       child: Image.asset(
                         'assets/google.jpeg',
+                        height: 13,
+                        width: 13,
                         fit: BoxFit.cover,
                       ),
                     ),
