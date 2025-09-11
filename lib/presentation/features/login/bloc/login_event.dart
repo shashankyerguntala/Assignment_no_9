@@ -15,6 +15,11 @@ class GoogleLoginEvent extends LoginEvent {}
 class SignUpEvent extends LoginEvent {
   final String email;
   final String password;
+  final String name;
 
-  SignUpEvent({required this.email, required this.password});
+  SignUpEvent({
+    required this.email,
+    required this.password,
+    required this.name,
+  });
 }

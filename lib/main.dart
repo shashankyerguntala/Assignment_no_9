@@ -1,5 +1,7 @@
 import 'package:assignment_9/core/constants.dart';
+import 'package:assignment_9/core/di/di.dart';
 import 'package:assignment_9/firebase_options.dart';
+import 'package:assignment_9/presentation/features/home/bloc/home_bloc.dart';
 import 'package:assignment_9/presentation/features/login/bloc/login_bloc.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +9,7 @@ import 'package:assignment_9/presentation/features/login/screens/sign_in_screen.
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() async {
+  await Di().init();
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(const MyApp());
@@ -19,7 +22,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => LoginBloc(), child: Container()),
+        BlocProvider(create: (context) => LoginBloc()),
+        BlocProvider(create: (context) => HomeBloc(di())),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

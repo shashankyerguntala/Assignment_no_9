@@ -14,6 +14,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passController = TextEditingController();
   final TextEditingController confirmPassController = TextEditingController();
+  final TextEditingController nameController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +54,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   ),
 
                   const SizedBox(height: 30),
-
+                  TextField(
+                    controller: nameController,
+                    keyboardType: TextInputType.emailAddress,
+                    decoration: InputDecoration(
+                      prefixIcon: const Icon(Icons.person_outlined),
+                      hintText: "Name",
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 20),
                   TextField(
                     controller: emailController,
                     keyboardType: TextInputType.emailAddress,
@@ -110,6 +122,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 SignUpEvent(
                                   email: emailController.text.trim(),
                                   password: passController.text.trim(),
+                                  name: nameController.text,
                                 ),
                               );
                             } else {
@@ -143,7 +156,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
-                              builder: (_) => const SignInScreen(),
+                              builder: (context) => const SignInScreen(),
                             ),
                           );
                         },

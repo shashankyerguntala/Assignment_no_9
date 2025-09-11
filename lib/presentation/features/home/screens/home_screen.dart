@@ -1,7 +1,9 @@
 import 'package:assignment_9/core/constants.dart';
-import 'package:assignment_9/presentation/features/home/screens/chats_screen.dart';
+import 'package:assignment_9/presentation/features/home/bloc/home_bloc.dart';
+import 'package:assignment_9/presentation/features/home/screens/home_chats_screen.dart';
 import 'package:assignment_9/presentation/features/home/widgets/icon_chip.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -17,6 +19,7 @@ class _HomeScreenState extends State<HomeScreen>
   @override
   void initState() {
     super.initState();
+    context.read<HomeBloc>().add(FetchUsers());
     tabController = TabController(length: 3, vsync: this);
   }
 
@@ -61,7 +64,7 @@ class _HomeScreenState extends State<HomeScreen>
       body: TabBarView(
         controller: tabController,
         children: const [
-          ChatsScreen(),
+          HomeChatsScreen(),
           Center(
             child: Text(
               "Coming Soon **",
