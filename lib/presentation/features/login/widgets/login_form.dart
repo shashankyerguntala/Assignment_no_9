@@ -101,9 +101,7 @@ class _LoginFormState extends State<LoginForm> {
                       backgroundColor: Colors.white,
                       child: Image.asset(
                         'assets/google.jpeg',
-                        fit: BoxFit.fill,
-                        height: 20,
-                        width: 20,
+                        fit: BoxFit.cover,
                       ),
                     ),
                     const SizedBox(width: 10),
