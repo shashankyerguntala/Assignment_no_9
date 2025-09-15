@@ -1,7 +1,9 @@
 import 'package:assignment_9/core/constants.dart';
+import 'package:assignment_9/core/utils/firebase_utils.dart';
 import 'package:assignment_9/presentation/features/home/bloc/home_bloc.dart';
-import 'package:assignment_9/presentation/features/home/screens/home_chats_screen.dart';
+import 'package:assignment_9/presentation/features/all_chats/screens/all_chats_screen.dart';
 import 'package:assignment_9/presentation/features/home/widgets/icon_chip.dart';
+import 'package:assignment_9/presentation/features/login/screens/sign_in_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -61,10 +63,48 @@ class _HomeScreenState extends State<HomeScreen>
           ),
         ),
       ),
+      drawer: Drawer(
+        child: Column(
+          children: [
+            DrawerHeader(child: Icon(Icons.chat)),
+            Center(
+              child: Padding(
+                padding: const EdgeInsets.all(6.0),
+                child: ListTile(
+                  leading: Icon(Icons.home),
+                  title: Text('HOME'),
+                  onTap: () {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (context) => HomeScreen()),
+                    );
+                  },
+                ),
+              ),
+            ),
+            Center(
+              child: Padding(
+                padding: const EdgeInsets.all(6.0),
+                child: ListTile(
+                  leading: Icon(Icons.logout),
+                  title: Text('SIGN OUT'),
+                  onTap: () {
+                    FirebaseUtils().signOut();
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (context) => SignInScreen()),
+                    );
+                  },
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
       body: TabBarView(
         controller: tabController,
         children: const [
-          HomeChatsScreen(),
+          AllChatsScreen(),
           Center(
             child: Text(
               "Coming Soon **",

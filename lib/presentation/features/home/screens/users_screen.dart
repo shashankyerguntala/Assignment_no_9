@@ -1,4 +1,6 @@
+import 'package:assignment_9/presentation/features/chats/screens/chats_screen.dart';
 import 'package:assignment_9/presentation/features/home/bloc/home_bloc.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:assignment_9/presentation/features/home/widgets/icon_chip.dart';
@@ -41,11 +43,31 @@ class _UsersScreenState extends State<UsersScreen> {
                 final users = state.users[index];
                 return Card(
                   child: GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      final receiverId = users.uid;
+                      final receiverName = users.name;
+                      final senderId = FirebaseAuth.instance.currentUser!.uid;
+
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ChatScreen(
+                            receiverId: receiverId,
+                            receiverName: receiverName,
+                            senderId: senderId,
+                          ),
+                        ),
+                      );
+                    },
+
                     child: ListTile(
                       leading: CircleAvatar(
                         backgroundColor: Colors.green,
-                        child: Text(users.name[0].toUpperCase()),
+                        child: Text(
+                          users.name.isNotEmpty
+                              ? users.name[0].toUpperCase()
+                              : "?",
+                        ),
                       ),
                       title: Text(users.name),
                     ),

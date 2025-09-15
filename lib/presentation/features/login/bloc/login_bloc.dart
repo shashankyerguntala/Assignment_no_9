@@ -72,7 +72,10 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       final userCredential = await FirebaseAuth.instance.signInWithCredential(
         credential,
       );
-      await saveUserToFirestore(userCredential.user!);
+      await saveUserToFirestore(
+        userCredential.user!,
+        name: userCredential.user!.displayName,
+      );
       emit(LoginLoaded(user: userCredential.user));
     } catch (e) {
       emit(LoginError(message: e.toString()));
